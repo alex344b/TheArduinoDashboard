@@ -1,0 +1,22 @@
+version: "3.8"
+
+services:
+  arduino-dashboard:
+    image: ${DOCKER_REGISTRY:-}arduino-dashboard:${TAG:-latest}
+    ports:
+      - "13000:13000"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=http://+:13000
+    deploy:
+      mode: replicated
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+networks:
+  dashboard-network:
+    driver: overlay
+    attachable: true
