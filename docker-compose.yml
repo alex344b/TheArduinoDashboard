@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   arduino-dashboard:
-    image: ${DOCKER_REGISTRY:-}arduino-dashboard:${TAG:-latest}
+    image: thearduinodashboard:latest
     ports:
       - "13000:13000"
     environment:
